@@ -9,11 +9,12 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Antralit | Infraestructura Digital Para El Futuro",
-  description: "Plataformas de software inteligentes para salud, finanzas, seguridad e infraestructura empresarial crítica.",
+  title: "Antralit",
+  description: "Infraestructura digital para el futuro.",
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
