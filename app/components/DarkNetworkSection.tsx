@@ -81,6 +81,36 @@ export default function DarkNetworkSection() {
       animation: floatParticle linear infinite;
       pointer-events: none;
     }
+
+    /* Mobile optimization - Enhanced visibility on smaller screens */
+    @media (max-width: 768px) {
+      svg line {
+        opacity: 0.6 !important;
+        stroke: #444444 !important;
+      }
+
+      svg circle[fill="#4a4a4a"],
+      svg circle[fill="#3a3a3a"],
+      svg circle[fill="#2a2a2a"],
+      svg circle[fill="#1a1a1a"],
+      svg circle[fill="#0a0a0a"] {
+        opacity: 0.85 !important;
+        fill: #555555 !important;
+        filter: drop-shadow(0 0 4px rgba(100, 100, 100, 0.3));
+      }
+
+      /* Grid pattern - More visible */
+      svg path {
+        stroke: #3a3a3a !important;
+        stroke-width: 1.2px !important;
+      }
+    }
+
+    /* Desktop - Keep original subtle aesthetic */
+    @media (min-width: 769px) {
+      svg line { opacity: 0.3; }
+      svg circle { opacity: 0.5; }
+    }
   `;
 
   return (

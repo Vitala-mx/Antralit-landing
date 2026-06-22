@@ -32,6 +32,29 @@ export default function Hero() {
     .flow-line-3 { animation: glow3 6s ease-in-out infinite 2s; }
     .flow-line-4 { animation: glow4 6s ease-in-out infinite 3s; }
     .flow-line-5 { animation: glow5 6s ease-in-out infinite 0.5s; }
+
+    /* Mobile optimization - Increased visibility on smaller screens */
+    @media (max-width: 768px) {
+      svg line { opacity: 0.8 !important; }
+      svg circle { opacity: 0.7 !important; }
+      svg text { opacity: 0.85 !important; }
+
+      /* Central node - Extra prominent on mobile */
+      svg circle[cx="250"][cy="120"] {
+        opacity: 0.95 !important;
+        filter: drop-shadow(0 0 6px rgba(208, 208, 208, 0.4));
+      }
+
+      /* Particle dots - More visible */
+      .hero-particles circle { opacity: 0.5 !important; }
+    }
+
+    /* Desktop - Keep original subtle aesthetic */
+    @media (min-width: 769px) {
+      svg line { opacity: 0.5; }
+      svg circle { opacity: 0.6; }
+      svg text { opacity: 0.7; }
+    }
   `;
 
   return (
@@ -39,8 +62,8 @@ export default function Hero() {
       <style>{lineAnimationStyle}</style>
       <div className="w-full max-w-7xl mx-auto overflow-hidden">
         {/* Network Diagram - Responsive */}
-        <div className="lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200 mb-8 sm:mb-12 lg:mb-0 hidden sm:block">
-          <div className="w-full h-48 sm:h-64 md:h-80 lg:h-full flex items-center justify-center lg:p-12 overflow-hidden">
+        <div className="w-full lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200 mb-6 sm:mb-8 md:mb-12 lg:mb-0">
+          <div className="w-full h-40 sm:h-48 md:h-64 lg:h-80 xl:h-full flex items-center justify-center lg:p-12 overflow-hidden">
             <svg className="w-full h-full" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             {/* Background particles */}
             <defs>
@@ -50,14 +73,14 @@ export default function Hero() {
             </defs>
 
             {/* Subtle particle dots */}
-            <circle cx="80" cy="60" r="1.5" fill="#d0d0d0" opacity="0.3"></circle>
-            <circle cx="420" cy="100" r="1" fill="#d0d0d0" opacity="0.3"></circle>
-            <circle cx="450" cy="200" r="1.2" fill="#d0d0d0" opacity="0.3"></circle>
-            <circle cx="100" cy="350" r="1" fill="#d0d0d0" opacity="0.3"></circle>
-            <circle cx="400" cy="420" r="1.5" fill="#d0d0d0" opacity="0.3"></circle>
-            <circle cx="150" cy="70" r="0.8" fill="#d0d0d0" opacity="0.25"></circle>
-            <circle cx="350" cy="450" r="1" fill="#d0d0d0" opacity="0.25"></circle>
-            <circle cx="50" cy="250" r="1.2" fill="#d0d0d0" opacity="0.25"></circle>
+            <circle className="hero-particles" cx="80" cy="60" r="1.5" fill="#d0d0d0" opacity="0.3"></circle>
+            <circle className="hero-particles" cx="420" cy="100" r="1" fill="#d0d0d0" opacity="0.3"></circle>
+            <circle className="hero-particles" cx="450" cy="200" r="1.2" fill="#d0d0d0" opacity="0.3"></circle>
+            <circle className="hero-particles" cx="100" cy="350" r="1" fill="#d0d0d0" opacity="0.3"></circle>
+            <circle className="hero-particles" cx="400" cy="420" r="1.5" fill="#d0d0d0" opacity="0.3"></circle>
+            <circle className="hero-particles" cx="150" cy="70" r="0.8" fill="#d0d0d0" opacity="0.25"></circle>
+            <circle className="hero-particles" cx="350" cy="450" r="1" fill="#d0d0d0" opacity="0.25"></circle>
+            <circle className="hero-particles" cx="50" cy="250" r="1.2" fill="#d0d0d0" opacity="0.25"></circle>
 
             {/* Connection lines from center IA */}
             <line className="flow-line-1" x1="250" y1="120" x2="150" y2="200" stroke="#d0d0d0" strokeWidth="0.8" opacity="0.5"></line>

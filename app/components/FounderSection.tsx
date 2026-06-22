@@ -17,17 +17,17 @@ export default function FounderSection() {
               CEO & Founder
             </p>
             <p className="text-xs text-gray-500 font-light leading-relaxed">
-              Especialista en infraestructura digital empresarial con 15+ años construyendo sistemas de clase mundial.
+              Fundador de Antralit Technologies. Enfocado en el desarrollo de plataformas SaaS, inteligencia artificial e infraestructura digital para industrias críticas.
             </p>
           </div>
 
           {/* Right - Philosophy Quote & Description */}
           <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4 min-w-0">
             <p className="text-sm lg:text-base font-light text-gray-600 leading-relaxed italic break-words">
-              "Software sin compromiso. Infraestructura que no falla. Innovación que anticipa."
+              "Construimos tecnología con una visión de largo plazo: sistemas escalables, seguros y preparados para resolver problemas reales."
             </p>
             <p className="text-xs lg:text-sm text-gray-500 font-light leading-relaxed">
-              Cada línea de código en Antralit está escrita con la premisa de que nuestros usuarios operan en ambientes donde el error no es una opción. Construimos para precisión, confiabilidad y anticipación.
+              Enfoque integral en salud, seguridad, finanzas e infraestructura. Cada decisión arquitectónica prioriza confiabilidad, escalabilidad y anticipación de problemas — no reacción ante ellos.
             </p>
           </div>
         </div>
