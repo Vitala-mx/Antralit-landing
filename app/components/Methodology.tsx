@@ -73,21 +73,21 @@ export default function Methodology() {
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`border border-gray-200 p-12 min-h-64 flex flex-col justify-between transition-all duration-300 ease-in-out cursor-pointer ${
+              className={`border border-gray-200 p-6 sm:p-8 lg:p-12 min-h-72 sm:min-h-80 lg:min-h-96 flex flex-col justify-between transition-all duration-300 ease-in-out cursor-pointer ${
                 hoveredIndex === index
                   ? 'bg-black text-white'
                   : 'bg-white text-black'
               }`}
             >
               {/* Top line accent */}
-              <div className={`w-12 h-0.5 mb-8 transition-all duration-300 ease-in-out ${
+              <div className={`w-12 h-0.5 mb-6 sm:mb-8 transition-all duration-300 ease-in-out ${
                 hoveredIndex === index
                   ? 'bg-gray-600'
                   : 'bg-transparent'
               }`}></div>
 
               {/* Step Number */}
-              <p className={`text-xs tracking-widest uppercase font-light mb-6 transition-colors duration-300 ease-in-out ${
+              <p className={`text-xs tracking-widest uppercase font-light mb-4 sm:mb-6 transition-colors duration-300 ease-in-out ${
                 hoveredIndex === index
                   ? 'text-gray-500'
                   : 'text-gray-400'
@@ -96,7 +96,7 @@ export default function Methodology() {
               </p>
 
               {/* Title */}
-              <h3 className={`text-2xl lg:text-3xl font-light mb-6 leading-tight transition-colors duration-300 ease-in-out ${
+              <h3 className={`text-xl sm:text-2xl lg:text-3xl font-light mb-4 sm:mb-6 leading-tight transition-colors duration-300 ease-in-out break-words ${
                 hoveredIndex === index
                   ? 'text-white'
                   : 'text-black'
@@ -105,7 +105,7 @@ export default function Methodology() {
               </h3>
 
               {/* Description */}
-              <p className={`text-base font-light leading-relaxed transition-colors duration-300 ease-in-out ${
+              <p className={`text-sm sm:text-base font-light leading-relaxed transition-colors duration-300 ease-in-out ${
                 hoveredIndex === index
                   ? 'text-gray-300'
                   : 'text-gray-600'

@@ -162,16 +162,16 @@ export default function BuiltForOrganizations() {
         </div>
 
         {/* Benefits Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {benefits.map((benefit, index) => (
-            <div key={index} className="border border-gray-200 rounded-lg p-8 hover:border-gray-400 transition duration-300">
+            <div key={index} className="border border-gray-200 rounded-lg p-5 sm:p-6 lg:p-8 hover:border-gray-400 transition duration-300">
               {/* Icon */}
-              <div className="mb-6 text-2xl text-gray-600 font-light">
+              <div className="mb-4 sm:mb-6 text-2xl text-gray-600 font-light">
                 {benefit.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-light text-black mb-3 leading-tight">
+              <h3 className="text-base sm:text-lg font-light text-black mb-2 sm:mb-3 leading-tight break-words">
                 {benefit.title}
               </h3>
 

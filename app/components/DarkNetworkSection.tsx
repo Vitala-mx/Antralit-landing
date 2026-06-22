@@ -116,7 +116,7 @@ export default function DarkNetworkSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="w-full h-96 lg:h-[600px] flex items-center justify-center">
+        <div className="w-full h-64 sm:h-80 md:h-96 lg:h-[600px] flex items-center justify-center">
           <svg
             viewBox="0 0 1400 800"
             className="w-full h-full"
@@ -176,9 +176,9 @@ export default function DarkNetworkSection() {
         </div>
 
         {/* Vision Text Section */}
-        <div className="mt-20 lg:mt-32 max-w-4xl mx-auto">
+        <div className="mt-12 sm:mt-16 lg:mt-32 max-w-4xl mx-auto">
           {/* Vision Label */}
-          <div className="flex items-center gap-3 mb-12">
+          <div className="flex items-center gap-3 mb-8 sm:mb-12">
             <div className="h-px w-8 bg-gray-600"></div>
             <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
               Nuestra Visión
@@ -186,19 +186,19 @@ export default function DarkNetworkSection() {
           </div>
 
           {/* Main Quote */}
-          <h2 className="text-4xl lg:text-5xl font-light text-white leading-tight mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light text-white leading-tight mb-8 sm:mb-12 break-words">
             "Creemos que el software debe <span className="text-gray-600">prevenir problemas,</span> no simplemente reaccionar."
           </h2>
 
           {/* Divider */}
-          <div className="h-px bg-gray-800 mb-12"></div>
+          <div className="h-px bg-gray-800 mb-8 sm:mb-12"></div>
 
           {/* Two Column Text */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <p className="text-base font-light text-gray-400 leading-relaxed">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+            <p className="text-sm sm:text-base font-light text-gray-400 leading-relaxed">
               La mayoría del software reacciona. Antralit construye sistemas que anticipan: plataformas que detectan el riesgo antes de que se convierta en incidente, y la oportunidad antes de que sea evidente.
             </p>
-            <p className="text-base font-light text-gray-400 leading-relaxed">
+            <p className="text-sm sm:text-base font-light text-gray-400 leading-relaxed">
               Trabajamos en la frontera de la IA, la infraestructura de datos y el software empresarial para dar a las organizaciones la inteligencia que necesitan para actuar con precisión — no con retrospectiva.
             </p>
           </div>

@@ -151,7 +151,7 @@ export default function WhatWeBuild() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="soluciones" className="px-6 lg:px-8 bg-white py-24 border-t border-gray-200 relative overflow-hidden scroll-mt-20">
+    <section id="soluciones" className="px-4 sm:px-6 lg:px-8 bg-white py-16 sm:py-20 lg:py-24 border-t border-gray-200 relative overflow-hidden scroll-mt-20 w-full">
       {/* Background particles */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
         {[
@@ -198,34 +198,34 @@ export default function WhatWeBuild() {
             </p>
           </div>
 
-          <div className="flex items-start justify-between">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
             <div className="flex-1 animate-slide-up animate-delay-100">
-              <h2 className="text-6xl lg:text-7xl font-light text-black leading-tight mb-1">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-light text-black leading-tight mb-1 break-words">
                 Productos SaaS para
               </h2>
-              <p className="text-2xl text-gray-350 font-light leading-tight">
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-350 font-light leading-tight">
                 industrias críticas.
               </p>
             </div>
 
-            <p className="text-sm text-gray-500 max-w-xs leading-relaxed font-light ml-8 animate-fade-in animate-delay-200">
+            <p className="text-sm sm:text-sm lg:text-sm text-gray-500 max-w-xs leading-relaxed font-light animate-fade-in animate-delay-200 flex-shrink-0">
               Plataformas especializadas para verticales donde el fallo no es una opción y la escala es arquitectura.
             </p>
           </div>
         </div>
 
         {/* Solution Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 overflow-x-hidden w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 w-full">
           {solutions.map((solution, index) => (
             <div
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`border border-gray-200 border-r-0 last:border-r border-b lg:border-b-0
-                         p-4 sm:p-6 md:p-8 min-h-80 sm:min-h-96 cursor-pointer relative animate-slide-up will-change-transform
-                         transition-all duration-500 ease-in-out ${
+                         p-6 sm:p-7 md:p-8 min-h-72 sm:min-h-80 md:min-h-96 cursor-pointer relative animate-slide-up will-change-transform
+                         transition-all duration-500 ease-in-out flex flex-col justify-between ${
                            hoveredIndex === index
-                             ? 'bg-black border-black text-white z-10 md:scale-105 shadow-2xl'
+                             ? 'bg-black border-black text-white z-10 md:scale-105 md:shadow-2xl'
                              : 'bg-white hover:bg-gray-50 md:hover:shadow-2xl'
                          }`}
               style={{
