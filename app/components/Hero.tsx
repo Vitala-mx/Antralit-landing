@@ -96,8 +96,8 @@ export default function Hero() {
           </div>
 
           {/* Right Content - Network Diagram */}
-          <div className="w-full lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200">
-            <div className="w-full h-40 sm:h-48 md:h-64 lg:h-full flex items-center justify-center lg:p-12 overflow-hidden">
+          <div className="w-full max-w-[280px] sm:max-w-[340px] md:max-w-none lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200 mx-auto">
+            <div className="w-full h-56 sm:h-64 md:h-80 lg:h-full flex items-center justify-center lg:p-12 overflow-hidden">
             <svg className="w-full h-full" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             {/* Background particles */}
             <defs>
