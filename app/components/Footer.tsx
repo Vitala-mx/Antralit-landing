@@ -2,17 +2,19 @@
 
 import Link from 'next/link';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const currentYear = CURRENT_YEAR;
 
   const footerLink = "text-gray-400 text-sm hover:text-white transition-all duration-300 hover:translate-x-1 inline-block";
 
   return (
-    <footer className="bg-black text-white border-t border-gray-900">
+    <footer className="bg-black text-white border-t border-gray-900 overflow-x-hidden">
       {/* Main Footer */}
-      <section className="px-6 lg:px-8 py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+      <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-12">
             {/* Columna 1 - Empresa */}
             <div>
               <img

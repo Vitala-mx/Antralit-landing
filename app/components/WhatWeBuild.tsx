@@ -215,18 +215,18 @@ export default function WhatWeBuild() {
         </div>
 
         {/* Solution Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 overflow-x-hidden w-full">
           {solutions.map((solution, index) => (
             <div
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
               className={`border border-gray-200 border-r-0 last:border-r border-b lg:border-b-0
-                         p-8 min-h-96 cursor-pointer relative animate-slide-up will-change-transform
-                         transition-all duration-500 ease-in-out hover:shadow-2xl ${
+                         p-4 sm:p-6 md:p-8 min-h-80 sm:min-h-96 cursor-pointer relative animate-slide-up will-change-transform
+                         transition-all duration-500 ease-in-out ${
                            hoveredIndex === index
-                             ? 'bg-black border-black text-white z-10 scale-105'
-                             : 'bg-white hover:bg-gray-50'
+                             ? 'bg-black border-black text-white z-10 md:scale-105 shadow-2xl'
+                             : 'bg-white hover:bg-gray-50 md:hover:shadow-2xl'
                          }`}
               style={{
                 animationDelay: `${index * 100}ms`,

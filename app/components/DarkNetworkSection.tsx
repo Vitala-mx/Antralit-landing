@@ -1,15 +1,31 @@
 'use client';
 
+// Partículas estáticas predefinidas - mismas en servidor y cliente
+const STATIC_PARTICLES = [
+  { id: 0, left: 15, top: 20, delay: 0, duration: 18, size: 3 },
+  { id: 1, left: 85, top: 15, delay: 1, duration: 22, size: 2 },
+  { id: 2, left: 25, top: 75, delay: 2, duration: 19, size: 2.5 },
+  { id: 3, left: 70, top: 80, delay: 3, duration: 21, size: 3 },
+  { id: 4, left: 45, top: 35, delay: 4, duration: 20, size: 2 },
+  { id: 5, left: 60, top: 50, delay: 5, duration: 19, size: 2.5 },
+  { id: 6, left: 10, top: 55, delay: 6, duration: 22, size: 2 },
+  { id: 7, left: 90, top: 65, delay: 7, duration: 18, size: 3 },
+  { id: 8, left: 35, top: 15, delay: 0.5, duration: 20, size: 2.5 },
+  { id: 9, left: 75, top: 35, delay: 1.5, duration: 21, size: 2 },
+  { id: 10, left: 20, top: 45, delay: 2.5, duration: 19, size: 3 },
+  { id: 11, left: 55, top: 70, delay: 3.5, duration: 20, size: 2 },
+  { id: 12, left: 80, top: 25, delay: 4.5, duration: 22, size: 2.5 },
+  { id: 13, left: 30, top: 60, delay: 5.5, duration: 18, size: 2 },
+  { id: 14, left: 65, top: 15, delay: 6.5, duration: 21, size: 3 },
+  { id: 15, left: 12, top: 80, delay: 7.5, duration: 19, size: 2.5 },
+  { id: 16, left: 50, top: 25, delay: 1, duration: 20, size: 2 },
+  { id: 17, left: 88, top: 45, delay: 2, duration: 22, size: 2.5 },
+  { id: 18, left: 28, top: 30, delay: 3, duration: 18, size: 3 },
+  { id: 19, left: 72, top: 70, delay: 4, duration: 19, size: 2 },
+];
+
 export default function DarkNetworkSection() {
-  // Generate floating particles
-  const particles = Array.from({ length: 40 }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    top: Math.random() * 100,
-    delay: Math.random() * 8,
-    duration: 15 + Math.random() * 10,
-    size: 2 + Math.random() * 2,
-  }));
+  const particles = STATIC_PARTICLES;
 
   const animationStyle = `
     @keyframes radarPulse {
@@ -38,7 +54,7 @@ export default function DarkNetworkSection() {
     }
     @keyframes floatParticle {
       0% {
-        transform: translateY(0px) translateX(0px);
+        transform: translateY(0px);
         opacity: 0;
       }
       10% {
@@ -48,7 +64,7 @@ export default function DarkNetworkSection() {
         opacity: 0.4;
       }
       100% {
-        transform: translateY(-100vh) translateX(50px);
+        transform: translateY(-100vh);
         opacity: 0;
       }
     }
@@ -68,7 +84,7 @@ export default function DarkNetworkSection() {
   `;
 
   return (
-    <section className="px-6 lg:px-8 text-white py-32 lg:py-48 relative overflow-hidden" style={{ backgroundColor: '#000000' }}>
+    <section className="px-4 sm:px-6 lg:px-8 text-white py-24 sm:py-32 lg:py-48 relative overflow-hidden w-full max-w-full" style={{ backgroundColor: '#000000' }}>
       <style>{animationStyle}</style>
 
       {/* Floating Particles */}

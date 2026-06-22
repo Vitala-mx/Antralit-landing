@@ -35,12 +35,12 @@ export default function Hero() {
   `;
 
   return (
-    <section className="pt-20 pb-16 md:pt-32 px-6 lg:px-8 bg-white overflow-visible relative">
+    <section className="pt-24 pb-12 sm:pt-28 md:pt-32 px-4 sm:px-6 lg:px-8 bg-white overflow-x-hidden relative">
       <style>{lineAnimationStyle}</style>
-      <div className="max-w-7xl mx-auto overflow-visible">
+      <div className="w-full max-w-7xl mx-auto overflow-hidden">
         {/* Network Diagram - Responsive */}
-        <div className="lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200 mb-12 lg:mb-0">
-          <div className="w-full h-64 md:h-80 lg:h-full flex items-center justify-center lg:p-12">
+        <div className="lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200 mb-8 sm:mb-12 lg:mb-0 hidden sm:block">
+          <div className="w-full h-48 sm:h-64 md:h-80 lg:h-full flex items-center justify-center lg:p-12 overflow-hidden">
             <svg className="w-full h-full" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             {/* Background particles */}
             <defs>

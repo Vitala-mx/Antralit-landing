@@ -108,33 +108,33 @@ function AnimatedCounter({ end, suffix, decimals }: CounterProps) {
 
 export default function BuiltForOrganizations() {
   return (
-    <section id="nosotros" className="px-6 lg:px-8 bg-white py-20 border-t border-gray-200 scroll-mt-20">
-      <div className="max-w-7xl mx-auto">
+    <section id="nosotros" className="px-4 sm:px-6 lg:px-8 bg-white py-12 sm:py-16 lg:py-20 border-t border-gray-200 scroll-mt-20 overflow-x-hidden">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-20">
-          <div className="flex items-center gap-3 mb-6 animate-fade-in">
+        <div className="mb-12 sm:mb-16 lg:mb-20">
+          <div className="flex items-center gap-3 mb-4 sm:mb-6 animate-fade-in">
             <div className="h-px w-8 bg-gray-300"></div>
             <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
               Por qué Antralit
             </p>
           </div>
 
-          <div className="max-w-3xl mb-8 animate-slide-up animate-delay-100">
-            <h2 className="text-5xl lg:text-6xl font-light text-black leading-tight mb-3">
+          <div className="max-w-3xl mb-6 sm:mb-8 animate-slide-up animate-delay-100">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-black leading-tight mb-2 sm:mb-3 break-words">
               Arquitectura de Producto
             </h2>
-            <p className="text-xl text-gray-350 font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-350 font-light leading-relaxed">
               sin concesiones.
             </p>
           </div>
 
-          <p className="text-base text-gray-500 font-light max-w-2xl animate-fade-in animate-delay-200">
+          <p className="text-sm sm:text-base text-gray-500 font-light max-w-2xl animate-fade-in animate-delay-200">
             Nuestros productos están diseñados para verticales donde el downtime es crítico, la seguridad no es negociable y la escala es fundamental.
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-20 pb-20 border-b border-gray-200">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-16 lg:mb-20 pb-12 sm:pb-16 lg:pb-20 border-b border-gray-200 w-full">
           <div>
             <AnimatedCounter end={4} suffix="+" decimals={0} />
             <p className="text-xs tracking-widest text-gray-500 uppercase font-light">

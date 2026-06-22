@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import DebugOverflow from "./components/DebugOverflow";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -24,7 +25,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} h-full antialiased`}
       style={{ fontFamily: "var(--font-space-grotesk)" }}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans overflow-x-hidden">
+        {children}
+        <DebugOverflow />
+      </body>
     </html>
   );
 }

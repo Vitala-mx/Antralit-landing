@@ -45,11 +45,11 @@ export default function Methodology() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="tecnologia" className="px-6 lg:px-8 bg-white py-20 border-t border-gray-200 scroll-mt-20">
-      <div className="max-w-7xl mx-auto">
+    <section id="tecnologia" className="px-4 sm:px-6 lg:px-8 bg-white py-12 sm:py-16 lg:py-20 border-t border-gray-200 scroll-mt-20 overflow-x-hidden">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="mb-20">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="mb-12 sm:mb-16 lg:mb-20">
+          <div className="flex items-center gap-3 mb-4 sm:mb-6">
             <div className="h-px w-8 bg-gray-300"></div>
             <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
               Metodología
@@ -57,17 +57,17 @@ export default function Methodology() {
           </div>
 
           <div className="max-w-2xl">
-            <h2 className="text-5xl lg:text-6xl font-light text-black leading-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-black leading-tight mb-2 sm:mb-3 break-words">
               Cómo construimos.
             </h2>
-            <p className="text-xl text-gray-350 font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-350 font-light leading-relaxed">
               Productos que duran.
             </p>
           </div>
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 w-full overflow-hidden">
           {steps.map((step, index) => (
             <div
               key={index}

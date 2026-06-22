@@ -16,15 +16,14 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 navbar-scroll-blur ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-28 md:h-24 lg:h-24">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 sm:h-24 md:h-24 lg:h-24">
           {/* Logo */}
-          <a href="/" className="flex items-center py-3 hover-smooth transition-smooth">
+          <a href="/" className="flex items-center py-2 hover-smooth transition-smooth flex-shrink-0">
             <img
               src="/logo.png"
               alt="Antralit Logo"
-              className="h-11 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
-              style={{ maxWidth: '300px' }}
+              className="h-8 sm:h-10 md:h-14 lg:h-16 w-auto object-contain max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[200px]"
             />
           </a>
 
