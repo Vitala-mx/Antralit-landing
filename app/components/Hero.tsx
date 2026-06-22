@@ -58,12 +58,46 @@ export default function Hero() {
   `;
 
   return (
-    <section className="pt-24 pb-12 sm:pt-28 md:pt-32 px-4 sm:px-6 lg:px-8 bg-white overflow-x-hidden relative">
+    <section className="pt-24 pb-12 sm:pt-28 md:pt-32 px-4 sm:px-6 lg:px-8 bg-white overflow-x-hidden">
       <style>{lineAnimationStyle}</style>
-      <div className="w-full max-w-7xl mx-auto overflow-hidden">
-        {/* Network Diagram - Responsive */}
-        <div className="w-full lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200 mb-6 sm:mb-8 md:mb-12 lg:mb-0">
-          <div className="w-full h-40 sm:h-48 md:h-64 lg:h-80 xl:h-full flex items-center justify-center lg:p-12 overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto relative">
+        {/* Main flex container - vertical on mobile, horizontal on desktop */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-0 items-start lg:relative">
+          {/* Left Content - Text section */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-6 md:gap-8">
+            {/* Subtitle */}
+            <div className="flex items-center gap-3 animate-fade-in">
+              <div className="h-px w-8 bg-gray-300"></div>
+              <p className="text-xs tracking-widest text-gray-500 uppercase font-medium">
+                Tecnología empresarial
+              </p>
+            </div>
+
+            {/* Main Headline */}
+            <div className="flex flex-col gap-1 md:gap-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black leading-tight animate-slide-up animate-delay-100">
+                Desarrollamos
+              </h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black leading-tight animate-slide-up animate-delay-200">
+                Infraestructura
+              </h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black leading-tight animate-slide-up animate-delay-300">
+                Digital Para
+              </h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-gray-400 leading-tight animate-slide-up animate-delay-400">
+                El Futuro.
+              </h1>
+            </div>
+
+            {/* Description */}
+            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed font-normal animate-fade-in animate-delay-300">
+              Antralit Technologies diseña y desarrolla plataformas de software inteligentes para salud, finanzas, seguridad e infraestructura empresarial crítica.
+            </p>
+          </div>
+
+          {/* Right Content - Network Diagram */}
+          <div className="w-full lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full lg:border-l lg:border-gray-200">
+            <div className="w-full h-40 sm:h-48 md:h-64 lg:h-full flex items-center justify-center lg:p-12 overflow-hidden">
             <svg className="w-full h-full" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
             {/* Background particles */}
             <defs>
@@ -124,48 +158,13 @@ export default function Hero() {
             <text x="470" y="480" textAnchor="end" fill="#999999" fontSize="9" fontWeight="400" letterSpacing="0.2">SECURE</text>
           </svg>
             </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="hidden lg:block absolute bottom-8 right-0 pr-12">
-          <p className="text-xs tracking-widest text-gray-400 uppercase font-light">Scroll</p>
-        </div>
-
-        {/* Main content grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 lg:gap-12 items-start lg:max-w-1/2">
-          {/* Left Content */}
-          <div className="flex flex-col gap-6 md:gap-8 max-w-2xl">
-            {/* Subtitle */}
-            <div className="flex items-center gap-3 animate-fade-in">
-              <div className="h-px w-8 bg-gray-300"></div>
-              <p className="text-xs tracking-widest text-gray-500 uppercase font-medium">
-                Tecnología empresarial
-              </p>
-            </div>
-
-            {/* Main Headline */}
-            <div className="flex flex-col gap-1 md:gap-2">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black leading-tight animate-slide-up animate-delay-100">
-                Desarrollamos
-              </h1>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black leading-tight animate-slide-up animate-delay-200">
-                Infraestructura
-              </h1>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-black leading-tight animate-slide-up animate-delay-300">
-                Digital Para
-              </h1>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light text-gray-400 leading-tight animate-slide-up animate-delay-400">
-                El Futuro.
-              </h1>
-            </div>
-
-            {/* Description */}
-            <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed font-normal animate-fade-in animate-delay-300">
-              Antralit Technologies diseña y desarrolla plataformas de software inteligentes para salud, finanzas, seguridad e infraestructura empresarial crítica.
-            </p>
           </div>
-
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="hidden lg:block absolute bottom-8 right-0 pr-12">
+        <p className="text-xs tracking-widest text-gray-400 uppercase font-light">Scroll</p>
       </div>
     </section>
   );
