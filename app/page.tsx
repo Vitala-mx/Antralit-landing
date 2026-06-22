@@ -16,8 +16,8 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <FounderSection />
         <StatsBar />
+        <FounderSection />
         <WhatWeBuild />
         <EnterpriseTier />
         <Methodology />
