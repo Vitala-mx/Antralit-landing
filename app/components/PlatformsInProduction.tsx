@@ -40,11 +40,6 @@ export default function PlatformsInProduction() {
                 MULTI-DISPOSITIVO
               </span>
             </div>
-
-            {/* CTA Button */}
-            <button className="w-fit px-6 sm:px-8 py-2 sm:py-3 bg-white text-black text-xs font-light tracking-wide hover:bg-gray-200 transition duration-200 flex-shrink-0">
-              CONOCER MÁS
-            </button>
           </div>
 
           {/* Right: VINVILA Logo/Image */}
