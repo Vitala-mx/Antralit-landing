@@ -151,9 +151,11 @@ export default function WhatWeBuild() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="soluciones" className="px-4 sm:px-6 lg:px-8 bg-white py-16 sm:py-20 lg:py-24 border-t border-gray-200 relative overflow-hidden scroll-mt-20 w-full">
-      {/* Background particles */}
-      <div className="absolute inset-0 pointer-events-none opacity-20">
+    <section id="soluciones" className="px-4 sm:px-6 lg:px-8 band-tint band-divider py-16 sm:py-20 lg:py-24 relative overflow-hidden scroll-mt-20 w-full">
+      {/* Polvo de fondo. Sobre blanco eran puntos grises de 4px que
+          apenas se veían; sobre negro un punto de 4px es una mota
+          sucia, así que bajan a 1px de blanco puro. */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
         {[
           { left: 8, top: 15, opacity: 0.3 },
           { left: 22, top: 28, opacity: 0.2 },
@@ -178,7 +180,7 @@ export default function WhatWeBuild() {
         ].map((particle, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-gray-300 rounded-full"
+            className="absolute w-px h-px bg-white rounded-full"
             style={{
               left: `${particle.left}%`,
               top: `${particle.top}%`,
@@ -191,42 +193,46 @@ export default function WhatWeBuild() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="mb-20 relative">
-          <div className="flex items-center gap-4 mb-8 animate-fade-in">
-            <div className="h-px w-16 bg-gray-300"></div>
-            <p className="text-xs tracking-widest text-gray-400 uppercase font-light">
-              Lo que construimos
-            </p>
+          <div className="eyebrow mb-8 animate-fade-in">
+            Lo que construimos
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-8">
             <div className="flex-1 animate-slide-up animate-delay-100">
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-light text-black leading-tight mb-1 break-words">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-light text-ink leading-tight mb-1 break-words">
                 Productos SaaS para
               </h2>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-350 font-light leading-tight">
+              {/* text-gray-350 no existe en Tailwind: esta línea se
+                  quedaba sin color y heredaba la del titular, así que
+                  el contraste entre las dos nunca llegó a verse. */}
+              <p className="text-lg sm:text-xl lg:text-2xl text-ink-muted font-light leading-tight">
                 industrias críticas.
               </p>
             </div>
 
-            <p className="text-sm sm:text-sm lg:text-sm text-gray-500 max-w-xs leading-relaxed font-light animate-fade-in animate-delay-200 flex-shrink-0">
+            <p className="text-sm text-ink-muted max-w-xs leading-relaxed font-light animate-fade-in animate-delay-200 flex-shrink-0">
               Plataformas especializadas para verticales donde el fallo no es una opción y la escala es arquitectura.
             </p>
           </div>
         </div>
 
         {/* Solution Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 w-full">
+        {/* Mismo patrón de borde compartido que Capacidades. El
+            anterior era "border-r-0 last:border-r", que solo cuadra
+            con exactamente 4 columnas: en el breakpoint md (2
+            columnas) la segunda tarjeta de cada fila se quedaba sin
+            lado derecho. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0 w-full border-t border-l border-hairline">
           {solutions.map((solution, index) => (
             <div
               key={index}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`border border-gray-200 border-r-0 last:border-r border-b lg:border-b-0
+              data-active={hoveredIndex === index}
+              className={`panel border-r border-b
                          p-6 sm:p-7 md:p-8 min-h-72 sm:min-h-80 md:min-h-96 cursor-pointer relative animate-slide-up will-change-transform
-                         transition-all duration-500 ease-in-out flex flex-col justify-between ${
-                           hoveredIndex === index
-                             ? 'bg-black border-black text-white z-10 md:scale-105 md:shadow-2xl'
-                             : 'bg-white hover:bg-gray-50 md:hover:shadow-2xl'
+                         flex flex-col justify-between ${
+                           hoveredIndex === index ? 'z-10' : ''
                          }`}
               style={{
                 animationDelay: `${index * 100}ms`,
@@ -236,28 +242,30 @@ export default function WhatWeBuild() {
             >
               {/* Icon - Top Right */}
               <div className={`absolute top-6 right-6 text-3xl transition-all duration-500 ease-in-out ${
-                hoveredIndex === index ? 'opacity-100 text-white' : 'opacity-40 text-gray-400'
+                hoveredIndex === index ? 'opacity-90 text-ink' : 'opacity-30 text-ink-faint'
               }`}>
                 {solution.icon}
               </div>
 
-              {/* Card Number */}
-              <p className={`text-xs tracking-widest uppercase mb-6 font-light transition-all duration-500 ease-in-out ${
-                hoveredIndex === index ? 'text-gray-500' : 'text-gray-300'
+              {/* Card Number — es lo único que toma el acento al pasar
+                  el cursor; el resto solo sube de luminosidad. */}
+              <p className={`text-xs tracking-[0.2em] uppercase mb-6 font-light transition-colors duration-500 ease-in-out ${
+                hoveredIndex === index ? 'text-accent' : 'text-ink-faint'
               }`}>
                 0{index + 1}
               </p>
 
-              {/* Diagram - SVG specific to card type */}
+              {/* Diagrama. El SVG se dibuja con currentColor, así que
+                  hereda la tinta clara del tema sin tocarlo. */}
               <div className={`mb-8 h-32 flex items-center justify-center transition-all duration-500 ease-in-out ${
-                hoveredIndex === index ? 'opacity-20' : 'opacity-100'
+                hoveredIndex === index ? 'opacity-15 text-ink' : 'opacity-70 text-ink-muted'
               }`}>
                 <SVGDiagram type={solution.svgType} />
               </div>
 
               {/* Title */}
-              <h3 className={`text-lg font-light mb-2 leading-tight transition-all duration-500 ease-in-out ${
-                hoveredIndex === index ? 'text-white' : 'text-black'
+              <h3 className={`text-lg font-light mb-2 leading-tight transition-colors duration-500 ease-in-out ${
+                hoveredIndex === index ? 'text-ink' : 'text-ink-soft'
               }`}>
                 {solution.title}
               </h3>
@@ -266,7 +274,7 @@ export default function WhatWeBuild() {
               <p className={`text-xs mb-8 leading-relaxed font-light transition-all duration-500 ease-in-out ${
                 hoveredIndex === index
                   ? 'opacity-0 absolute pointer-events-none'
-                  : 'text-gray-600 opacity-100 h-auto'
+                  : 'text-ink-muted opacity-100 h-auto'
               }`}>
                 {solution.description}
               </p>
@@ -274,23 +282,16 @@ export default function WhatWeBuild() {
               {/* Hover Description - Hidden until hover */}
               <p className={`text-xs mb-8 leading-relaxed font-light transition-all duration-500 ease-in-out ${
                 hoveredIndex === index
-                  ? 'text-gray-300 opacity-100 h-auto'
+                  ? 'text-ink-soft opacity-100 h-auto'
                   : 'opacity-0 absolute pointer-events-none h-0'
               }`}>
                 {solution.hoverDescription}
               </p>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-1.5 transition-all duration-500">
+              {/* Tags — .chip ya reacciona al hover del .panel padre. */}
+              <div className="flex flex-wrap gap-1.5">
                 {solution.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className={`inline-block px-2 py-0.5 text-xs font-light rounded-sm transition-all duration-500 ease-in-out border ${
-                      hoveredIndex === index
-                        ? 'bg-gray-900 text-gray-300 border-gray-700'
-                        : 'bg-gray-100 text-gray-600 border-gray-200'
-                    }`}
-                  >
+                  <span key={tagIndex} className="chip">
                     {tag}
                   </span>
                 ))}

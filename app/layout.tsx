@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import AmbientBackground from "./components/AmbientBackground";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -30,7 +31,12 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} h-full antialiased`}
       style={{ fontFamily: "var(--font-space-grotesk)" }}
     >
+      {/* Sin bg-*: el fondo lo pone <html> y lo cubre el
+          AmbientBackground. Ver la nota de apilado en globals.css. */}
       <body className="min-h-full flex flex-col font-sans overflow-x-hidden">
+        {/* Fijo detrás de todo el documento — las secciones son
+            translúcidas y lo dejan pasar. */}
+        <AmbientBackground />
         {children}
         <Analytics />
       </body>

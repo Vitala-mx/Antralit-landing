@@ -74,48 +74,61 @@ export default function DarkNetworkSection() {
     .radar-secondary {
       animation: radarPulseSecondary 5.5s linear infinite;
     }
-    .floating-particle {
+    .dark-net .floating-particle {
       position: absolute;
-      background: #555;
+      background: #4a5566;
       border-radius: 50%;
       animation: floatParticle linear infinite;
       pointer-events: none;
     }
 
-    /* Mobile optimization - Enhanced visibility on smaller screens */
+    /* OJO: estos selectores estaban sin acotar ("svg line", "svg
+       circle", "svg path"). Esta hoja se inyecta en el documento
+       entero, así que reescribían el trazo y la opacidad de TODOS los
+       SVG del sitio — los diagramas del hero, los de Soluciones — y
+       ninguno de ellos tiene nada que ver con esta red. Ahora todo
+       cuelga de .dark-net. */
     @media (max-width: 768px) {
-      svg line {
+      .dark-net svg line {
         opacity: 0.6 !important;
-        stroke: #444444 !important;
+        stroke: #38455a !important;
       }
 
-      svg circle[fill="#4a4a4a"],
-      svg circle[fill="#3a3a3a"],
-      svg circle[fill="#2a2a2a"],
-      svg circle[fill="#1a1a1a"],
-      svg circle[fill="#0a0a0a"] {
-        opacity: 0.85 !important;
-        fill: #555555 !important;
-        filter: drop-shadow(0 0 4px rgba(100, 100, 100, 0.3));
+      .dark-net svg circle[data-node] {
+        opacity: 0.9 !important;
+        fill: #3d4a5e !important;
+        filter: drop-shadow(0 0 6px rgba(53, 200, 224, 0.18));
       }
 
-      /* Grid pattern - More visible */
-      svg path {
-        stroke: #3a3a3a !important;
+      .dark-net svg path {
+        stroke: #232d3d !important;
         stroke-width: 1.2px !important;
       }
     }
 
-    /* Desktop - Keep original subtle aesthetic */
     @media (min-width: 769px) {
-      svg line { opacity: 0.3; }
-      svg circle { opacity: 0.5; }
+      .dark-net svg line   { opacity: 0.45; }
+      .dark-net svg circle { opacity: 0.6; }
     }
   `;
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 text-white py-24 sm:py-32 lg:py-48 relative overflow-hidden w-full max-w-full" style={{ backgroundColor: '#000000' }}>
+    // Es la sección más profunda de la página: el resto de bandas van
+    // del #05070b al #0f141d y esta cae por debajo, hasta el negro. El
+    // degradado evita que se lea como un rectángulo pegado.
+    <section
+      className="dark-net px-4 sm:px-6 lg:px-8 text-ink py-24 sm:py-32 lg:py-48 relative overflow-hidden w-full max-w-full"
+      style={{ background: 'linear-gradient(165deg, #060d1a 0%, #03070f 45%, #000205 100%)' }}
+    >
       <style>{animationStyle}</style>
+
+      {/* Halo de acento: da un foco de color frío al centro de la
+          sección sin tocar la legibilidad del texto. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/3 h-[38rem] w-[38rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60"
+        style={{ background: 'radial-gradient(circle, rgba(53,200,224,0.10), transparent 65%)' }}
+      />
 
       {/* Floating Particles */}
       {particles.map((particle) => (
@@ -134,11 +147,11 @@ export default function DarkNetworkSection() {
       ))}
 
       {/* Grid Pattern Background */}
-      <div className="absolute inset-0 opacity-25">
+      <div className="absolute inset-0 opacity-40">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="grid" width="120" height="120" patternUnits="userSpaceOnUse">
-              <path d="M 120 0 L 0 0 0 120" fill="none" stroke="#2a2a2a" strokeWidth="1"/>
+              <path d="M 120 0 L 0 0 0 120" fill="none" stroke="#141c28" strokeWidth="1"/>
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#grid)" />
@@ -164,71 +177,70 @@ export default function DarkNetworkSection() {
             </defs>
 
             {/* Líneas de conexión - más finas */}
-            <line x1="280" y1="280" x2="480" y2="380" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
-            <line x1="280" y1="280" x2="700" y2="320" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
-            <line x1="280" y1="280" x2="1050" y2="280" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="280" y1="280" x2="480" y2="380" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="280" y1="280" x2="700" y2="320" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="280" y1="280" x2="1050" y2="280" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
 
-            <line x1="480" y1="380" x2="700" y2="320" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
-            <line x1="480" y1="380" x2="700" y2="520" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="480" y1="380" x2="700" y2="320" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="480" y1="380" x2="700" y2="520" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
 
-            <line x1="700" y1="320" x2="1050" y2="280" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
-            <line x1="700" y1="320" x2="1050" y2="500" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="700" y1="320" x2="1050" y2="280" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="700" y1="320" x2="1050" y2="500" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
 
-            <line x1="1050" y1="500" x2="700" y2="520" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
-            <line x1="1050" y1="280" x2="1200" y2="120" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="1050" y1="500" x2="700" y2="520" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="1050" y1="280" x2="1200" y2="120" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
 
-            <line x1="480" y1="380" x2="150" y2="580" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
-            <line x1="700" y1="520" x2="400" y2="680" stroke="#333" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="480" y1="380" x2="150" y2="580" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
+            <line x1="700" y1="520" x2="400" y2="680" stroke="#2b374a" strokeWidth="0.8" strokeLinecap="round" />
 
-            {/* Nodo principal - Círculo grande izquierda */}
-            <circle className="radar-primary" cx="280" cy="280" r="60" fill="none" stroke="#4a4a4a" />
-            <circle cx="280" cy="280" r="60" fill="#3a3a3a" opacity="0.6" filter="url(#glow)" />
+            {/* Nodo principal — el único con acento: es el centro de la
+                red y el pulso de radar sale de él. El resto son masas
+                frías que se apagan con la distancia. */}
+            <circle className="radar-primary" cx="280" cy="280" r="60" fill="none" stroke="var(--accent)" />
+            <circle data-node cx="280" cy="280" r="60" fill="#1b2635" opacity="0.6" filter="url(#glow)" />
 
             {/* Nodos secundarios - Medianos */}
-            <circle cx="480" cy="380" r="35" fill="#2a2a2a" opacity="0.5" />
+            <circle data-node cx="480" cy="380" r="35" fill="#16202e" opacity="0.55" />
 
-            <circle className="radar-secondary" cx="700" cy="320" r="32" fill="none" stroke="#3a3a3a" />
-            <circle cx="700" cy="320" r="32" fill="#2a2a2a" opacity="0.5" />
+            <circle className="radar-secondary" cx="700" cy="320" r="32" fill="none" stroke="#2b374a" />
+            <circle data-node cx="700" cy="320" r="32" fill="#16202e" opacity="0.55" />
 
-            <circle cx="1050" cy="280" r="30" fill="#2a2a2a" opacity="0.5" />
+            <circle data-node cx="1050" cy="280" r="30" fill="#16202e" opacity="0.55" />
 
-            <circle cx="1050" cy="500" r="28" fill="#2a2a2a" opacity="0.5" />
+            <circle data-node cx="1050" cy="500" r="28" fill="#16202e" opacity="0.55" />
 
             {/* Nodos terciarios - Pequeños */}
-            <circle cx="700" cy="520" r="18" fill="#1a1a1a" opacity="0.45" />
+            <circle data-node cx="700" cy="520" r="18" fill="#101825" opacity="0.5" />
 
-            <circle cx="150" cy="580" r="16" fill="#1a1a1a" opacity="0.45" />
+            <circle data-node cx="150" cy="580" r="16" fill="#101825" opacity="0.5" />
 
-            <circle cx="1200" cy="120" r="14" fill="#1a1a1a" opacity="0.45" />
+            <circle data-node cx="1200" cy="120" r="14" fill="#101825" opacity="0.5" />
 
-            <circle cx="400" cy="680" r="12" fill="#0a0a0a" opacity="0.4" />
+            <circle data-node cx="400" cy="680" r="12" fill="#0b111c" opacity="0.45" />
           </svg>
         </div>
 
         {/* Vision Text Section */}
         <div className="mt-12 sm:mt-16 lg:mt-32 max-w-4xl mx-auto">
           {/* Vision Label */}
-          <div className="flex items-center gap-3 mb-8 sm:mb-12">
-            <div className="h-px w-8 bg-gray-600"></div>
-            <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
-              Nuestra Visión
-            </p>
-          </div>
+          <div className="eyebrow mb-8 sm:mb-12">Nuestra Visión</div>
 
-          {/* Main Quote */}
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light text-white leading-tight mb-8 sm:mb-12 break-words">
-            "Creemos que el software debe <span className="text-gray-600">prevenir problemas,</span> no simplemente reaccionar."
+          {/* Cita. El fragmento destacado iba en text-gray-600, que
+              sobre negro se hundía hasta ser ilegible: el énfasis
+              pasa al acento, que es lo que la frase pedía. */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-light text-ink leading-tight mb-8 sm:mb-12 break-words">
+            &ldquo;Creemos que el software debe <span className="text-accent">prevenir problemas,</span> no simplemente reaccionar.&rdquo;
           </h2>
 
           {/* Divider */}
-          <div className="h-px bg-gray-800 mb-8 sm:mb-12"></div>
+          <div className="h-px bg-hairline mb-8 sm:mb-12"></div>
 
           {/* Two Column Text */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
-            <p className="text-sm sm:text-base font-light text-gray-400 leading-relaxed">
+            <p className="text-sm sm:text-base font-light text-ink-muted leading-relaxed">
               La mayoría del software reacciona. Antralit construye sistemas que anticipan: plataformas que detectan el riesgo antes de que se convierta en incidente, y la oportunidad antes de que sea evidente.
             </p>
-            <p className="text-sm sm:text-base font-light text-gray-400 leading-relaxed">
+            <p className="text-sm sm:text-base font-light text-ink-muted leading-relaxed">
               Trabajamos en la frontera de la IA, la infraestructura de datos y el software empresarial para dar a las organizaciones la inteligencia que necesitan para actuar con precisión — no con retrospectiva.
             </p>
           </div>

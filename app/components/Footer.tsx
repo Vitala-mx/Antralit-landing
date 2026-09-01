@@ -7,10 +7,12 @@ const CURRENT_YEAR = new Date().getFullYear();
 export default function Footer() {
   const currentYear = CURRENT_YEAR;
 
-  const footerLink = "text-gray-400 text-sm hover:text-white transition-all duration-300 hover:translate-x-1 inline-block";
+  const footerLink = "text-ink-muted text-sm font-light hover:text-ink transition-all duration-300 hover:translate-x-1 inline-block";
 
   return (
-    <footer className="bg-black text-white border-t border-gray-900 overflow-x-hidden">
+    // El pie cierra la página en el negro más profundo, por debajo de
+    // todas las bandas: es el suelo, no una banda más.
+    <footer className="bg-black text-ink border-t border-hairline overflow-x-hidden">
       {/* Main Footer */}
       <section className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full">
         <div className="w-full max-w-7xl mx-auto">
@@ -20,16 +22,16 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Antralit Logo"
-                className="h-8 w-auto mb-6"
+                className="logo-invert h-8 w-auto mb-6"
               />
-              <p className="text-gray-400 text-sm leading-relaxed font-light max-w-xs">
+              <p className="text-ink-muted text-sm leading-relaxed font-light max-w-xs">
                 Infraestructura digital para el futuro. Software empresarial para organizaciones donde fallar no es una opción.
               </p>
             </div>
 
             {/* Columna 2 - Soluciones */}
             <div>
-              <h4 className="text-xs tracking-widest uppercase font-light mb-6 text-gray-300">
+              <h4 className="text-xs tracking-[0.2em] uppercase font-light mb-6 text-ink-faint">
                 Soluciones
               </h4>
               <ul className="space-y-3">
@@ -63,7 +65,7 @@ export default function Footer() {
 
             {/* Columna 3 - Compañía */}
             <div>
-              <h4 className="text-xs tracking-widest uppercase font-light mb-6 text-gray-300">
+              <h4 className="text-xs tracking-[0.2em] uppercase font-light mb-6 text-ink-faint">
                 Compañía
               </h4>
               <ul className="space-y-3">
@@ -97,7 +99,7 @@ export default function Footer() {
 
             {/* Columna 4 - Legal */}
             <div>
-              <h4 className="text-xs tracking-widest uppercase font-light mb-6 text-gray-300">
+              <h4 className="text-xs tracking-[0.2em] uppercase font-light mb-6 text-ink-faint">
                 Legal
               </h4>
               <ul className="space-y-3">
@@ -131,11 +133,11 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <div className="border-t border-gray-900 my-12"></div>
+          <div className="border-t border-hairline my-12"></div>
 
           {/* Bottom Footer */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
-            <p className="text-gray-500 text-xs font-light">
+            <p className="text-ink-faint text-xs font-light">
               © {currentYear} Antralit Technologies. Todos los derechos reservados.
             </p>
             <div className="flex items-center">
@@ -143,7 +145,7 @@ export default function Footer() {
                 href="https://linkedin.com/company/antralit-technologies"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white text-sm font-light transition-all duration-300 hover:translate-x-1 inline-block hover:underline"
+                className="text-ink-soft hover:text-accent text-sm font-light transition-colors duration-300 inline-block"
               >
                 LinkedIn
               </a>
