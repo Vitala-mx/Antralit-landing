@@ -95,7 +95,7 @@ function AnimatedCounter({ end, suffix, decimals }: CounterProps) {
   return (
     <p
       ref={ref}
-      className="text-5xl lg:text-6xl font-light text-black mb-3 transition-all duration-1000 ease-out"
+      className="text-5xl lg:text-6xl font-light text-ink mb-3 transition-all duration-1000 ease-out"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0px)' : 'translateY(16px)',
@@ -108,54 +108,51 @@ function AnimatedCounter({ end, suffix, decimals }: CounterProps) {
 
 export default function BuiltForOrganizations() {
   return (
-    <section id="nosotros" className="px-4 sm:px-6 lg:px-8 bg-white py-12 sm:py-16 lg:py-20 border-t border-gray-200 scroll-mt-20 overflow-x-hidden">
+    <section id="nosotros" className="px-4 sm:px-6 lg:px-8 band-tint band-divider py-12 sm:py-16 lg:py-20 scroll-mt-20 overflow-x-hidden">
       <div className="w-full max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="mb-12 sm:mb-16 lg:mb-20">
-          <div className="flex items-center gap-3 mb-4 sm:mb-6 animate-fade-in">
-            <div className="h-px w-8 bg-gray-300"></div>
-            <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
-              Por qué Antralit
-            </p>
+          <div className="eyebrow mb-5 sm:mb-6 animate-fade-in">
+            Por qué Antralit
           </div>
 
           <div className="max-w-3xl mb-6 sm:mb-8 animate-slide-up animate-delay-100">
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-black leading-tight mb-2 sm:mb-3 break-words">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-ink leading-tight mb-2 sm:mb-3 break-words">
               Arquitectura de Producto
             </h2>
-            <p className="text-lg sm:text-xl text-gray-350 font-light leading-relaxed">
+            <p className="text-lg sm:text-xl text-ink-muted font-light leading-relaxed">
               sin concesiones.
             </p>
           </div>
 
-          <p className="text-sm sm:text-base text-gray-500 font-light max-w-2xl animate-fade-in animate-delay-200">
+          <p className="text-sm sm:text-base text-ink-muted font-light max-w-2xl leading-relaxed animate-fade-in animate-delay-200">
             Nuestros productos están diseñados para verticales donde el downtime es crítico, la seguridad no es negociable y la escala es fundamental.
           </p>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-16 lg:mb-20 pb-12 sm:pb-16 lg:pb-20 border-b border-gray-200 w-full">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-12 mb-12 sm:mb-16 lg:mb-20 pb-12 sm:pb-16 lg:pb-20 border-b border-hairline w-full">
           <div>
             <AnimatedCounter end={4} suffix="+" decimals={0} />
-            <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
+            <p className="text-xs tracking-[0.2em] text-ink-muted uppercase font-light">
               Verticales de Industria
             </p>
           </div>
           <div>
             <AnimatedCounter end={100} suffix="%" decimals={0} />
-            <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
+            <p className="text-xs tracking-[0.2em] text-ink-muted uppercase font-light">
               Zero Trust
             </p>
           </div>
           <div>
             <AnimatedCounter end={99.9} suffix="%" decimals={1} />
-            <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
+            <p className="text-xs tracking-[0.2em] text-ink-muted uppercase font-light">
               SLA Objetivo
             </p>
           </div>
           <div>
             <AnimatedCounter end={0} suffix="" decimals={0} />
-            <p className="text-xs tracking-widest text-gray-500 uppercase font-light">
+            <p className="text-xs tracking-[0.2em] text-ink-muted uppercase font-light">
               Concesiones
             </p>
           </div>
@@ -164,19 +161,21 @@ export default function BuiltForOrganizations() {
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {benefits.map((benefit, index) => (
-            <div key={index} className="border border-gray-200 rounded-lg p-5 sm:p-6 lg:p-8 hover:border-gray-400 transition duration-300">
+            /* Esquinas rectas: el rounded-lg era el único radio grande
+               de la página y sobre negro delataba la caja. */
+            <div key={index} className="panel group border p-5 sm:p-6 lg:p-8">
               {/* Icon */}
-              <div className="mb-4 sm:mb-6 text-2xl text-gray-600 font-light">
+              <div className="mb-4 sm:mb-6 text-2xl text-ink-faint font-light transition-colors duration-500 group-hover:text-accent">
                 {benefit.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-base sm:text-lg font-light text-black mb-2 sm:mb-3 leading-tight break-words">
+              <h3 className="text-base sm:text-lg font-light text-ink mb-2 sm:mb-3 leading-tight break-words">
                 {benefit.title}
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-600 font-light leading-relaxed">
+              <p className="text-sm text-ink-muted font-light leading-relaxed">
                 {benefit.description}
               </p>
             </div>

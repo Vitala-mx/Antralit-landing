@@ -3,27 +3,27 @@ import Footer from '@/app/components/Footer';
 
 export default function Privacy() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-1 pt-32 px-6 lg:px-8 pb-20">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-5xl lg:text-6xl font-light text-black leading-tight mb-8">
+          <h1 className="text-5xl lg:text-6xl font-light text-ink leading-tight mb-8">
             Aviso de Privacidad
           </h1>
-          <p className="text-gray-500 text-sm mb-12">
+          <p className="text-ink-faint text-sm mb-12">
             Última actualización: {new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
 
-          <div className="prose prose-invert max-w-none text-gray-600 space-y-6">
+          <div className="prose prose-invert max-w-none text-ink-soft font-light leading-relaxed space-y-6">
             <section>
-              <h2 className="text-2xl font-light text-black mt-8 mb-4">1. Introducción</h2>
+              <h2 className="text-2xl font-light text-ink mt-8 mb-4">1. Introducción</h2>
               <p className="leading-relaxed">
                 Antralit Technologies ("nosotros", "nuestro", "Antralit") está comprometido con la protección de tu privacidad. Este Aviso de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos tu información cuando visitas nuestro sitio web.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-black mt-8 mb-4">2. Información que Recopilamos</h2>
+              <h2 className="text-2xl font-light text-ink mt-8 mb-4">2. Información que Recopilamos</h2>
               <p className="leading-relaxed">
                 Podemos recopilar información sobre ti de varias maneras, incluyendo:
               </p>
@@ -35,7 +35,7 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-black mt-8 mb-4">3. Cómo Usamos tu Información</h2>
+              <h2 className="text-2xl font-light text-ink mt-8 mb-4">3. Cómo Usamos tu Información</h2>
               <p className="leading-relaxed">
                 Utilizamos la información recopilada para:
               </p>
@@ -47,14 +47,14 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-black mt-8 mb-4">4. Protección de Datos</h2>
+              <h2 className="text-2xl font-light text-ink mt-8 mb-4">4. Protección de Datos</h2>
               <p className="leading-relaxed">
                 Implementamos medidas de seguridad técnicas, administrativas y físicas para proteger tu información personal contra acceso no autorizado, alteración, divulgación o destrucción.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-light text-black mt-8 mb-4">5. Contacto</h2>
+              <h2 className="text-2xl font-light text-ink mt-8 mb-4">5. Contacto</h2>
               <p className="leading-relaxed">
                 Si tienes preguntas sobre este Aviso de Privacidad, puedes contactarnos en: privacy@antralit.com
               </p>

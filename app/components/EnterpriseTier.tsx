@@ -51,23 +51,18 @@ const capabilities: Capability[] = [
 
 export default function EnterpriseTier() {
   return (
-    <section className="px-4 sm:px-6 lg:px-8 bg-white py-12 sm:py-16 border-t border-gray-200 overflow-x-hidden">
+    <section className="px-4 sm:px-6 lg:px-8 band band-divider py-12 sm:py-16 overflow-x-hidden">
       <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-10 sm:mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gray-300"></div>
-            <p className="text-xs tracking-widest text-gray-400 uppercase font-light">
-              Capacidades
-            </p>
-          </div>
+          <div className="eyebrow mb-5">Capacidades</div>
 
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 sm:mb-8 gap-6 sm:gap-0">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-6 sm:mb-8 gap-6 sm:gap-0">
             <div className="flex-1 min-w-0">
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-black leading-tight break-words">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl font-light text-ink leading-tight break-words">
                 Productos SaaS
               </h2>
-              <p className="text-lg sm:text-xl text-gray-350 font-light leading-tight">
+              <p className="text-lg sm:text-xl text-ink-muted font-light leading-tight">
                 infraestructura de clase mundial.
               </p>
             </div>
@@ -75,57 +70,53 @@ export default function EnterpriseTier() {
             {/* Metrics - Compact */}
             <div className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-12 flex-shrink-0 w-full lg:w-auto">
               <div>
-                <p className="text-xl sm:text-2xl lg:text-3xl font-light text-black">8</p>
-                <p className="text-xs text-gray-400 uppercase tracking-widest font-light mt-1 break-words">
+                <p className="text-xl sm:text-2xl lg:text-3xl font-light text-ink">8</p>
+                <p className="text-xs text-ink-faint uppercase tracking-widest font-light mt-1 break-words">
                   Capacidades
                 </p>
               </div>
               <div>
-                <p className="text-xl sm:text-2xl lg:text-3xl font-light text-black">∞</p>
-                <p className="text-xs text-gray-400 uppercase tracking-widest font-light mt-1 break-words">
+                <p className="text-xl sm:text-2xl lg:text-3xl font-light text-ink">∞</p>
+                <p className="text-xs text-ink-faint uppercase tracking-widest font-light mt-1 break-words">
                   Escalabilidad
                 </p>
               </div>
               <div>
-                <p className="text-xl sm:text-2xl lg:text-3xl font-light text-black">99.9%</p>
-                <p className="text-xs text-gray-400 uppercase tracking-widest font-light mt-1 break-words">
+                <p className="text-xl sm:text-2xl lg:text-3xl font-light text-ink">99.9%</p>
+                <p className="text-xs text-ink-faint uppercase tracking-widest font-light mt-1 break-words">
                   Disponibilidad
                 </p>
               </div>
             </div>
           </div>
 
-          <p className="text-sm text-gray-500 font-light max-w-2xl">
+          <p className="text-sm text-ink-muted font-light max-w-2xl leading-relaxed">
             Nuestros productos están construidos con estándares de seguridad, auditabilidad y escala empresarial — sin concesiones.
           </p>
         </div>
 
-        {/* Grid Continua - Bordes Compartidos */}
-        <div className="border border-gray-200 overflow-x-hidden">
-          {/* Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-x divide-y divide-gray-200 w-full">
-            {capabilities.slice(0, 4).map((capability, index) => (
-              <div key={index} className="p-4 sm:p-6 hover:bg-gray-50 transition duration-200">
-                <div className="text-2xl text-gray-600 mb-3 sm:mb-4 font-light">{capability.icon}</div>
-                <h3 className="text-sm font-light text-black mb-2 leading-tight line-clamp-2">
+        {/* Rejilla continua de borde compartido. Eran dos filas
+            escritas a mano con divide-x/divide-y; en una rejilla de 4
+            columnas divide-y también pinta la línea superior de los
+            items 2-4 de la primera fila, así que salía doblada contra
+            el borde del contenedor. El patrón correcto es: el
+            contenedor cierra arriba e izquierda, cada celda cierra
+            derecha y abajo. Ni líneas dobles ni huecos, y funciona
+            igual con 1, 2 o 4 columnas. */}
+        <div className="border-t border-l border-hairline overflow-x-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full">
+            {capabilities.map((capability, index) => (
+              <div
+                key={index}
+                className="group border-r border-b border-hairline p-5 sm:p-6 transition-colors duration-300 hover:bg-canvas-lift"
+              >
+                <div className="text-2xl text-ink-faint mb-3 sm:mb-4 font-light transition-colors duration-300 group-hover:text-accent">
+                  {capability.icon}
+                </div>
+                <h3 className="text-sm font-light text-ink-soft mb-2 leading-tight transition-colors duration-300 group-hover:text-ink">
                   {capability.title}
                 </h3>
-                <p className="text-xs text-gray-500 font-light leading-relaxed">
-                  {capability.description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-x divide-gray-200 w-full">
-            {capabilities.slice(4, 8).map((capability, index) => (
-              <div key={index + 4} className="p-4 sm:p-6 hover:bg-gray-50 transition duration-200">
-                <div className="text-2xl text-gray-600 mb-3 sm:mb-4 font-light">{capability.icon}</div>
-                <h3 className="text-sm font-light text-black mb-2 leading-tight line-clamp-2">
-                  {capability.title}
-                </h3>
-                <p className="text-xs text-gray-500 font-light leading-relaxed">
+                <p className="text-xs text-ink-muted font-light leading-relaxed">
                   {capability.description}
                 </p>
               </div>

@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
+const links = [
+  { href: '#soluciones', label: 'Soluciones' },
+  { href: '#productos', label: 'Productos' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#tecnologia', label: 'Tecnología' },
+];
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -20,37 +27,34 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20 sm:h-24 md:h-24 lg:h-24">
           {/* Logo */}
           <a href="/" className="flex items-center py-2 hover-smooth transition-smooth flex-shrink-0">
+            {/* El PNG es trazo negro sobre transparente: se invierte por
+                CSS en vez de mantener un segundo archivo en blanco. */}
             <img
               src="/logo.png"
               alt="Antralit Logo"
-              className="h-8 sm:h-10 md:h-14 lg:h-16 w-auto object-contain max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[200px]"
+              className="logo-invert h-8 sm:h-10 md:h-14 lg:h-16 w-auto object-contain max-w-[120px] sm:max-w-[140px] md:max-w-[160px] lg:max-w-[200px]"
             />
           </a>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-8">
-            <a href="#soluciones" className="text-sm text-gray-600 transition-smooth relative group scroll-smooth">
-              Soluciones
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-            </a>
-            <a href="#productos" className="text-sm text-gray-600 transition-smooth relative group scroll-smooth">
-              Productos
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-            </a>
-            <a href="#nosotros" className="text-sm text-gray-600 transition-smooth relative group scroll-smooth">
-              Nosotros
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-            </a>
-            <a href="#tecnologia" className="text-sm text-gray-600 transition-smooth relative group scroll-smooth">
-              Tecnología
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-            </a>
+          {/* Navigation Links — reposo en gris frío, hover a blanco puro
+              con el subrayado creciendo desde la izquierda. */}
+          <div className="hidden md:flex items-center gap-10">
+            {links.map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className="text-sm text-ink-muted hover:text-ink transition-smooth relative group scroll-smooth"
+              >
+                {label}
+                <span className="absolute -bottom-1.5 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
           </div>
 
           {/* Mobile Menu */}
-          <button className="md:hidden p-2">
+          <button className="md:hidden p-2 text-ink-soft" aria-label="Abrir menú">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 7h16M4 12h16M4 17h16" />
             </svg>
           </button>
         </div>

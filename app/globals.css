@@ -1,30 +1,576 @@
 @import "tailwindcss";
 @import "./styles/animations.css";
 
+/* ============================================================
+   SISTEMA DE COLOR — TEMA OSCURO
+   ============================================================
+   El sitio se invierte: el lienzo pasa a ser negro y la tinta,
+   blanca. No es un simple intercambio de #fff por #000. La
+   referencia es palantir.com, y lo que define ese aspecto no es el
+   negro sino la disciplina que lo acompaña:
+
+     · una escala de negros muy cercana entre sí (el "fondo" son
+       cuatro valores casi idénticos, no uno),
+     · texto blanco puro reservado a los titulares y una escala de
+       grises fríos descendente para todo lo demás,
+     · filetes de 1px en blanco al 6–18% en lugar de bordes grises,
+     · cero relleno de color: el acento aparece en hover y en
+       indicadores de estado, nunca como fondo de bloque,
+     · esquinas rectas y sombras casi inexistentes — sobre negro la
+       sombra no separa, separa la línea.
+
+   Toda la paleta cuelga de aquí; los componentes no vuelven a
+   escribir un gris de Tailwind.
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* Lienzos. Las diferencias son mínimas a propósito: sobre negro,
+     un salto de luminosidad grande se lee como una caja pegada
+     encima. Estos cuatro valores se leen como profundidad. */
+  --canvas: #05070b;
+  --canvas-raised: #090c12;
+  --canvas-tint: #0b0f16;
+  --canvas-deep: #0f141d;
+  --canvas-lift: #151b25; /* solo para paneles en hover */
+
+  /* Tinta. Antes --ink era el azul del logotipo; ahora es el blanco
+     de los titulares y la escala baja hasta el gris de las
+     microetiquetas. El nombre se mantiene para no romper el
+     vocabulario del proyecto. */
+  --ink: #f4f6f9;
+  --ink-soft: #b9c1cd;
+  --ink-muted: #808b9b;
+  --ink-faint: #58626f;
+
+  /* Azul de marca — sigue existiendo, ahora como sombra fría de
+     los fondos, no como color de texto. */
+  --navy-deep: #030a1a;
+  --navy: #0a1f3d;
+  --navy-mid: #123a6b;
+  --navy-soft: #1d4f8f;
+
+  /* Acento. Se sube un punto respecto al claro (#16b8d4): sobre
+     negro el cian oscuro se apaga. Uso con cuentagotas. */
+  --accent: #35c8e0;
+  --accent-deep: #16b8d4;
+  --accent-glow: rgba(53, 200, 224, 0.18);
+
+  /* Líneas: blanco translúcido, no gris opaco. Sobre negro un gris
+     sólido se ve como un objeto; el blanco al 9% se ve como una
+     línea de luz. */
+  --hairline: rgba(255, 255, 255, 0.09);
+  --hairline-strong: rgba(255, 255, 255, 0.18);
+
+  --foreground: var(--ink);
+  --background: var(--canvas);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-canvas: var(--canvas);
+  --color-canvas-raised: var(--canvas-raised);
+  --color-canvas-tint: var(--canvas-tint);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-canvas-lift: var(--canvas-lift);
+
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+
+  --color-navy-deep: var(--navy-deep);
+  --color-navy: var(--navy);
+  --color-navy-mid: var(--navy-mid);
+  --color-navy-soft: var(--navy-soft);
+
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+
   --font-sans: var(--font-space-grotesk);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* El diseño está comprometido con el modo oscuro: es el tema, no una
+   variante. No hay regla de prefers-color-scheme porque no hay un
+   segundo tema al que cambiar. */
 
+/* El negro del documento va en <html>, no en <body>, y esto importa:
+   <AmbientBackground/> es un hijo de <body> con z-index -10. Un
+   descendiente de z-index negativo se pinta ANTES que los fondos de
+   los bloques en flujo, así que un background opaco en <body> lo
+   taparía entero. Mientras <html> no tenga fondo, el de <body> se
+   propaga al lienzo y se pinta primero — que es lo que hacía que
+   funcionara. Al fijar aquí el color se rompe esa propagación, de
+   modo que <body> tiene que quedarse transparente. */
 html {
   scroll-behavior: smooth;
+  background-color: #000;
 }
 
 body {
-  background: var(--background);
+  background-color: transparent;
   color: var(--foreground);
   font-family: var(--font-space-grotesk), sans-serif;
+  /* Sobre negro el texto fino se engorda por el antialias del
+     sistema. Esto lo devuelve al peso que se diseñó. */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-glow);
+  color: var(--ink);
+}
+
+/* Barra de scroll: la del sistema en claro cortaba la página con una
+   franja gris por el lado derecho. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.26);
+  background-clip: content-box;
+}
+
+/* Foco visible — sobre negro el outline por defecto del navegador
+   desaparece. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   BANDAS DE SECCIÓN
+   ============================================================
+   El ritmo del scroll lo dan estas bandas alternándose. Todas son
+   translúcidas para que el fondo ambiental se vea a través: si
+   fueran opacas, taparían el degradado y solo se vería en los
+   márgenes.
+   ============================================================ */
+
+.band {
+  position: relative;
+  background-color: color-mix(in srgb, var(--canvas-raised) 72%, transparent);
+}
+
+.band-tint {
+  position: relative;
+  background-color: color-mix(in srgb, var(--canvas-tint) 78%, transparent);
+}
+
+.band-deep {
+  position: relative;
+  background-color: color-mix(in srgb, var(--canvas-deep) 84%, transparent);
+}
+
+/* Separador de bandas: una línea que se desvanece hacia los extremos
+   en vez de un borde de lado a lado. Marca la división sin cortar la
+   página en cajas. */
+.band-divider {
+  border-top: 0;
+  position: relative;
+}
+
+.band-divider::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline-strong) 18%,
+    var(--hairline-strong) 82%,
+    transparent
+  );
+}
+
+/* ============================================================
+   SUPERFICIES Y PANELES
+   ============================================================ */
+
+.surface {
+  background-color: var(--canvas-raised);
+  border: 1px solid var(--hairline);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.surface:hover {
+  transform: translateY(-3px);
+  background-color: var(--canvas-lift);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* Panel de rejilla: la unidad base de las cuadrículas de tarjetas.
+   El estado de reposo es casi invisible — solo la línea — y el hover
+   sube un escalón de luminosidad y enciende un filete de acento
+   arriba. Es el gesto de Palantir: no se ilumina la caja, se ilumina
+   su borde.
+
+   El ancho del borde lo pone cada rejilla con las utilidades de
+   Tailwind (hay cuadrículas de borde compartido que apagan lados
+   sueltos); aquí solo se fija el color, para no pisarlas. */
+.panel {
+  position: relative;
+  background-color: transparent;
+  border-color: var(--hairline);
+  transition:
+    background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease;
+}
+
+.panel::after {
+  content: '';
+  position: absolute;
+  inset-inline: -1px;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent) 50%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.panel:hover,
+.panel[data-active='true'] {
+  background-color: var(--canvas-lift);
+  border-color: var(--hairline-strong);
+}
+
+.panel:hover::after,
+.panel[data-active='true']::after {
+  opacity: 1;
+}
+
+/* Etiqueta de sección — el "kicker" en versalitas que abre cada
+   bloque, con su filete a la izquierda. Estaba repetido a mano en
+   seis componentes con seis grises distintos. */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  flex: none;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+/* Píldora de metadatos (tags técnicos de las tarjetas). */
+.chip {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  border: 1px solid var(--hairline);
+  background-color: rgba(255, 255, 255, 0.02);
+  transition:
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.panel:hover .chip,
+.panel[data-active='true'] .chip {
+  color: var(--ink-soft);
+  border-color: var(--hairline-strong);
+}
+
+/* El logotipo es un PNG de trazo negro sobre transparente. Invertirlo
+   lo pasa a blanco conservando el alfa — más fiable que mantener dos
+   archivos que se desincronizan. */
+.logo-invert {
+  filter: invert(1);
+}
+
+/* ============================================================
+   FONDO AMBIENTAL
+   ============================================================
+   <AmbientBackground/> montaba .ambient-* y .lg-* pero este archivo
+   nunca llegó a definirlos: eran divs vacíos y el fondo era un plano
+   liso. Aquí está el aspecto, calibrado para negro.
+
+   La regla que gobierna todo el bloque: nada supera el 0.2 de
+   opacidad. Sobre blanco un fondo ambiental se nota poco y se
+   perdona; sobre negro cualquier masa de color se convierte en una
+   mancha y arruina la sobriedad. Lo que se busca es que el negro no
+   sea plano, no que se vea un degradado.
+   ============================================================ */
+
+.ambient-root {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #000;
+  /* Posición del cursor, escrita desde JS. El valor inicial deja el
+     foco fuera de pantalla hasta el primer movimiento. */
+  --mx: -100vw;
+  --my: -100vh;
+}
+
+/* Lavado base: el negro se abre ligeramente hacia arriba, que es
+   donde está el hero. Da un horizonte sin dibujar una línea. */
+.lg-base {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% -10%, #0d1626 0%, transparent 60%),
+    radial-gradient(90% 60% at 100% 100%, #0a1424 0%, transparent 55%),
+    #04060a;
+}
+
+/* Masas a la deriva. El contenedor lleva el desplazamiento y el <i>
+   interior la deformación: dos animaciones a ritmos distintos sin
+   pelearse por la propiedad transform. */
+.lg-blob {
+  position: absolute;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.lg-blob i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  will-change: transform, border-radius;
+  animation: lgMorph 24s ease-in-out infinite;
+}
+
+.lg-blob-1 {
+  top: -12%;
+  left: -8%;
+  width: 48vw;
+  height: 48vw;
+  animation: lgDrift1 42s ease-in-out infinite;
+}
+.lg-blob-1 i {
+  background: radial-gradient(circle at 35% 35%, rgba(29, 79, 143, 0.20), transparent 70%);
+}
+
+.lg-blob-2 {
+  top: 18%;
+  right: -14%;
+  width: 42vw;
+  height: 42vw;
+  animation: lgDrift2 52s ease-in-out infinite;
+}
+.lg-blob-2 i {
+  background: radial-gradient(circle at 60% 40%, rgba(53, 200, 224, 0.10), transparent 70%);
+  animation-delay: -8s;
+}
+
+.lg-blob-3 {
+  bottom: -10%;
+  left: 12%;
+  width: 52vw;
+  height: 52vw;
+  animation: lgDrift3 60s ease-in-out infinite;
+}
+.lg-blob-3 i {
+  background: radial-gradient(circle at 40% 60%, rgba(18, 58, 107, 0.18), transparent 70%);
+  animation-delay: -14s;
+}
+
+.lg-blob-4 {
+  top: 46%;
+  left: 40%;
+  width: 34vw;
+  height: 34vw;
+  animation: lgDrift2 48s ease-in-out infinite reverse;
+}
+.lg-blob-4 i {
+  background: radial-gradient(circle at 50% 50%, rgba(10, 31, 61, 0.22), transparent 70%);
+  animation-delay: -20s;
+}
+
+@keyframes lgDrift1 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  33%      { transform: translate3d(6vw, 4vh, 0); }
+  66%      { transform: translate3d(-3vw, 7vh, 0); }
+}
+
+@keyframes lgDrift2 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-7vw, 5vh, 0); }
+}
+
+@keyframes lgDrift3 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  40%      { transform: translate3d(5vw, -6vh, 0); }
+  75%      { transform: translate3d(-4vw, -2vh, 0); }
+}
+
+@keyframes lgMorph {
+  0%, 100% { border-radius: 50% 50% 50% 50%; transform: scale(1); }
+  50%      { border-radius: 62% 38% 45% 55%; transform: scale(1.08); }
+}
+
+/* Retícula. El elemento que más "sala de control" aporta y el más
+   fácil de exagerar: 1px de blanco al 4%, con máscara radial para
+   que no llegue nunca a los bordes de la ventana. */
+.lg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(115% 85% at 50% 20%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(115% 85% at 50% 20%, #000 0%, transparent 78%);
+}
+
+/* Paneles: destellos diagonales largos, del orden de una lámina de
+   vidrio cruzando la pantalla. Son lo que impide que la retícula se
+   lea como papel milimetrado. */
+.lg-pane {
+  position: absolute;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.028) 45%,
+    rgba(255, 255, 255, 0.055) 50%,
+    rgba(255, 255, 255, 0.028) 55%,
+    transparent 100%
+  );
+  filter: blur(28px);
+  will-change: transform;
+}
+
+.lg-pane-1 {
+  top: -20%;
+  left: -30%;
+  width: 90vw;
+  height: 60vh;
+  transform: rotate(-14deg);
+  animation: lgPane 38s ease-in-out infinite;
+}
+
+.lg-pane-2 {
+  top: 35%;
+  right: -35%;
+  width: 80vw;
+  height: 50vh;
+  transform: rotate(10deg);
+  animation: lgPane 46s ease-in-out infinite reverse;
+}
+
+.lg-pane-3 {
+  bottom: -25%;
+  left: -20%;
+  width: 100vw;
+  height: 55vh;
+  transform: rotate(-8deg);
+  animation: lgPane 54s ease-in-out infinite;
+  animation-delay: -18s;
+}
+
+@keyframes lgPane {
+  0%, 100% { opacity: 0.5; transform: translate3d(0, 0, 0) rotate(-12deg); }
+  50%      { opacity: 0.9; transform: translate3d(4vw, -3vh, 0) rotate(-6deg); }
+}
+
+/* Foco del cursor. Solo se enciende cuando hay puntero fino: en
+   táctil el JS ni registra el listener, así que --mx/--my se quedan
+   fuera de pantalla y esto no pinta nada. */
+.ambient-spotlight {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40rem;
+  height: 40rem;
+  transform: translate3d(calc(var(--mx) - 20rem), calc(var(--my) - 20rem), 0);
+  background: radial-gradient(
+    circle,
+    rgba(53, 200, 224, 0.07) 0%,
+    rgba(29, 79, 143, 0.05) 35%,
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.ambient-spotlight.is-active {
+  opacity: 1;
+}
+
+/* Viñeta: cierra los cuatro bordes en negro puro. Es lo que hace que
+   el contenido flote en lugar de estar pegado sobre un rectángulo. */
+.ambient-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    130% 100% at 50% 45%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.55) 78%,
+    #000 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-blob,
+  .lg-blob i,
+  .lg-pane {
+    animation: none !important;
+  }
+}
+
+/* En móvil el coste de cuatro capas desenfocadas a 90px no lo paga
+   nadie: se dejan el lavado, la retícula y la viñeta. */
+@media (max-width: 768px) {
+  .lg-blob,
+  .lg-pane {
+    display: none;
+  }
+
+  .lg-base {
+    background:
+      radial-gradient(140% 70% at 50% -5%, #0d1626 0%, transparent 62%),
+      #04060a;
+  }
 }
