@@ -197,21 +197,84 @@
    NAVBAR SCROLL EFFECT
    ============================================ */
 
-/* La barra al hacer scroll no se "aclara": se oscurece hasta casi
-   opaca y aparece el filete inferior. El desenfoque sigue dejando
-   pasar el fondo ambiental. */
+/* Vidrio líquido.
+
+   La versión anterior se quedaba en "panel translúcido": un tinte al
+   72% de opacidad tapa lo que pasa por debajo, y si no se ve el
+   contenido deformándose detrás, el desenfoque no existe para el ojo
+   — daba igual el blur. Un vidrio real necesita tres cosas que aquí
+   faltaban:
+
+     1. Tinte bajo (45%) y desenfoque alto, no al revés. Lo que separa
+        la barra del fondo es la distorsión, no la opacidad.
+     2. saturate + brightness sobre el fondo: al desenfocar, el color
+        se apaga; hay que devolverle la vida o el vidrio se ve sucio.
+     3. Borde inferior difuminado. Un filete de 1px recto delata que
+        es un rectángulo pegado encima; el vidrio se disuelve en el
+        contenido. Por eso el canto se hace con una máscara y no con
+        border-bottom.
+
+   Todo vive en un ::before propio en vez de en el <nav>: la máscara
+   tiene que recortar el desenfoque y el tinte a la vez, y aplicada al
+   nav recortaría también los enlaces. */
 .navbar-scroll-blur {
-  transition: all 0.3s ease;
-  backdrop-filter: blur(0px);
-  background-color: rgba(4, 6, 10, 0);
-  border-bottom: 1px solid transparent;
+  transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  background-color: transparent;
 }
 
-.navbar-scroll-blur.scrolled {
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  background-color: rgba(4, 6, 10, 0.72);
-  border-bottom: 1px solid var(--hairline);
+.navbar-scroll-blur::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Un pseudo posicionado pinta por encima del contenido en flujo, así
+     que sin esto la lámina taparía el logo y los enlaces. El <nav>
+     lleva z-50 y position:fixed, o sea que ya es un contexto de
+     apilado: el -1 se queda dentro de la barra y no se escapa detrás
+     de la página. */
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+  background-color: rgba(7, 10, 16, 0.45);
+  /* Brillo especular: la luz entra por el canto superior y se apaga
+     hacia abajo. Es lo que da el grosor. */
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.025) 40%,
+    transparent 100%
+  );
+
+  /* Sin -webkit-backdrop-filter a mano: Lightning CSS (el compilador
+     de CSS de Next 16) fusiona el par prefijado/sin prefijar contra
+     los targets del proyecto y aquí se quedaba sin ninguno de los
+     dos — la declaración desaparecía de la hoja compilada y el
+     desenfoque no llegaba nunca al navegador. Escrita una sola vez,
+     sobrevive, y el prefijo lo pone el propio pipeline si hace falta. */
+  backdrop-filter: blur(22px) saturate(185%) brightness(1.08);
+
+  /* El desenfoque se desvanece con la lámina: sólido donde están los
+     enlaces (hasta el 62%) y disuelto en el borde inferior. */
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 62%,
+    rgba(0, 0, 0, 0.45) 84%,
+    transparent 100%
+  );
+}
+
+.navbar-scroll-blur.scrolled::before {
+  opacity: 1;
+}
+
+/* Sin soporte de backdrop-filter no hay nada que desenfocar, así que
+   el tinte sube hasta ser legible por sí solo. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .navbar-scroll-blur::before {
+    background-color: rgba(7, 10, 16, 0.92);
+  }
 }
 
 /* ============================================
